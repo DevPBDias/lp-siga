@@ -14,7 +14,7 @@ const footerLinks = [
   { label: "A solução", href: "#solution" },
   { label: "Demonstração", href: "#demo" },
   { label: "Aplicativo", href: "#app" },
-  { label: "Fazendas reais", href: "#real-farms" },
+  { label: "Seja um parceiro", href: "#real-farms" },
   { label: "Contato", href: "#contact" },
   { label: "Dúvidas", href: "#faq" },
 ];
