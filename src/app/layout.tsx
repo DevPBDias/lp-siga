@@ -4,6 +4,7 @@ import "./globals.css";
 import { NavigationLinks } from "../components/layout/Navigation";
 import { cn } from "@/lib/utils";
 import Footer from "../components/layout/footer";
+import { siteUrl } from "@/src/constants/site";
 
 const bebas = Bebas_Neue({
   variable: "--font-bebas",
@@ -16,14 +17,13 @@ const inter = Inter({
   subsets: ["latin"],
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
 const siteTitle = "SIGA Cattle | Gestão de rebanho bovino, mesmo sem internet";
 const siteDescription =
   "Organize identificação, genealogia, reprodução, pesagens e vacinas do rebanho em um só lugar. Registre no campo sem sinal e acompanhe tudo pelo painel web.";
 const socialImage = "/opengraph-image.jpg";
 
 export const metadata: Metadata = {
-  metadataBase: siteUrl ? new URL(siteUrl) : undefined,
+  metadataBase: new URL(siteUrl),
   title: {
     default: siteTitle,
     template: "%s | SIGA Cattle",
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     "pesagem de gado",
     "genealogia bovina",
   ],
-  alternates: siteUrl ? { canonical: "/" } : undefined,
+  alternates: { canonical: "/" },
   robots: {
     index: true,
     follow: true,
@@ -60,7 +60,7 @@ export const metadata: Metadata = {
     siteName: "SIGA Cattle",
     title: siteTitle,
     description: siteDescription,
-    ...(siteUrl ? { url: siteUrl } : {}),
+    url: siteUrl,
     images: [
       {
         url: socialImage,
