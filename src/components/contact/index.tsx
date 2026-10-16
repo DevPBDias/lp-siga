@@ -3,6 +3,7 @@
 import { useState } from "react";
 import type { FormEvent } from "react";
 import { whatsappDisplayNumber, whatsappNumber } from "@/src/constants/contact";
+import Reveal from "../ui/reveal";
 
 type FormStatus = "idle" | "invalid-name" | "invalid-phone" | "opened";
 
@@ -59,7 +60,7 @@ export default function ContactSection() {
       }}
     >
       <div className="mx-auto grid w-full max-w-[1440px] gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
-        <div className="flex max-w-[min(100%,450px)] flex-col gap-4 lg:gap-8">
+        <Reveal className="flex max-w-[min(100%,450px)] flex-col gap-4 lg:gap-8">
           <div>
             <p className="mb-4 w-fit bg-[#2c5128] p-2 font-bebas text-base uppercase tracking-[0.18em] text-white sm:px-3 sm:py-2 sm:text-sm">
               Comece por aqui
@@ -79,23 +80,29 @@ export default function ContactSection() {
               "Teste com os seus animais, não com dados de exemplo",
               "Ajuda para colocar o rebanho no aplicativo",
               "Sem compromisso",
-            ].map((point) => (
-              <li key={point} className="flex items-start gap-3">
-                <span
-                  aria-hidden="true"
-                  className="mt-2 size-2 shrink-0 bg-[#4bd12d]"
-                />
-                {point}
+            ].map((point, index) => (
+              <li key={point}>
+                <Reveal
+                  delay={index * 0.07}
+                  className="flex items-start gap-3"
+                >
+                  <span
+                    aria-hidden="true"
+                    className="mt-2 size-2 shrink-0 bg-[#4bd12d]"
+                  />
+                  {point}
+                </Reveal>
               </li>
             ))}
           </ul>
-        </div>
+        </Reveal>
 
-        <form
-          onSubmit={handleSubmit}
-          noValidate
-          className="border border-[#2c5128] bg-white p-5 shadow-[6px_6px_0_0_#2c5128] sm:p-8"
-        >
+        <Reveal className="h-full">
+          <form
+            onSubmit={handleSubmit}
+            noValidate
+            className="h-full border border-[#2c5128] bg-white p-5 shadow-[6px_6px_0_0_#2c5128] sm:p-8"
+          >
           <div className="grid gap-5 sm:grid-cols-2">
             <label className="font-inter text-sm font-medium text-[#2c5128]">
               Seu nome
@@ -218,7 +225,8 @@ export default function ContactSection() {
               )}
             </p>
           )}
-        </form>
+          </form>
+        </Reveal>
       </div>
     </section>
   );

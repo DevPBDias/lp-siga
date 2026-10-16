@@ -1,4 +1,5 @@
 import DemoVideoPlayer from "./video-player";
+import Reveal from "../ui/reveal";
 
 function getYouTubeEmbedUrl(url?: string) {
   if (!url) return null;
@@ -35,7 +36,7 @@ export default function DemoSection() {
     >
       <div className="mx-auto w-full max-w-[1440px]">
         <div className="grid items-center gap-8 lg:grid-cols-[0.9fr_1px_1.25fr] lg:gap-10 xl:gap-14">
-          <div className="flex max-w-[min(100%,450px)] flex-col gap-4 lg:gap-8">
+          <Reveal className="flex max-w-[min(100%,450px)] flex-col gap-4 lg:gap-8">
             <div>
               <p className="mb-4 w-fit bg-[#f1ebe2] p-2 font-bebas text-base uppercase tracking-[0.18em] text-[#203d1f] sm:px-3 sm:py-2 sm:text-sm">
                 VÍDEO
@@ -51,12 +52,12 @@ export default function DemoSection() {
               sistema de gestão pecuária feito para funcionar onde a internet
               não chega.
             </p>
-          </div>
+          </Reveal>
 
           <div className="hidden h-full min-h-80 w-1 bg-[#f1ebe2]/80 lg:block" />
           <div className="h-1 w-full bg-[#f1ebe2]/80 lg:hidden" />
 
-          <div className="min-w-0">
+          <Reveal className="min-w-0" hover>
             <div className="w-full overflow-hidden border border-[#f1ebe2]/80 bg-black shadow-[6px_6px_0_0_#4bd12d]">
               {embedUrl ? (
                 <DemoVideoPlayer embedUrl={embedUrl} />
@@ -73,15 +74,17 @@ export default function DemoSection() {
                 </div>
               )}
             </div>
-          </div>
+          </Reveal>
         </div>
 
-        <a
-          href="#contact"
-          className="mx-auto mt-10 flex min-h-12 lg:mt-24 w-fit items-center justify-center bg-[#f1ebe2] px-7 py-3 font-bebas text-lg uppercase text-[#203d1f] shadow-[4px_4px_0_0_#4bd12d] transition-colors hover:bg-white sm:mt-12"
-        >
-          Quero ver isso na minha fazenda
-        </a>
+        <Reveal className="mx-auto mt-10 w-fit lg:mt-24 sm:mt-12">
+          <a
+            href="#contact"
+            className="flex min-h-12 items-center justify-center bg-[#f1ebe2] px-7 py-3 font-bebas text-lg uppercase text-[#203d1f] shadow-[4px_4px_0_0_#4bd12d] transition-colors hover:bg-white"
+          >
+            Quero ver isso na minha fazenda
+          </a>
+        </Reveal>
       </div>
     </section>
   );

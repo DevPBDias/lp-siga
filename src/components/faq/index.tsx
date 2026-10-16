@@ -1,5 +1,6 @@
 import { FAQQuestion, questions } from "@/src/constants/questions";
 import { Plus } from "lucide-react";
+import Reveal from "../ui/reveal";
 
 export default function FAQSection() {
   return (
@@ -13,7 +14,7 @@ export default function FAQSection() {
       }}
     >
       <div className="mx-auto grid w-full max-w-[1440px] gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
-        <div className="flex max-w-[min(100%,450px)] flex-col gap-4 lg:sticky lg:top-28 lg:self-start lg:gap-8">
+        <Reveal className="flex max-w-[min(100%,450px)] flex-col gap-4 lg:sticky lg:top-28 lg:self-start lg:gap-8">
           <div>
             <p className="mb-4 w-fit bg-[#2c5128] p-2 font-bebas text-base uppercase tracking-[0.18em] text-white sm:px-3 sm:py-2 sm:text-sm">
               Dúvidas frequentes
@@ -27,43 +28,46 @@ export default function FAQSection() {
             Saiba mais sobre como o Siga Cattle ajuda a organizar a gestão do
             rebanho, no campo e no escritório.
           </p>
-        </div>
+        </Reveal>
 
         <div className="border-t border-[#2c5128]/45">
-          {(questions as FAQQuestion[]).map((item) => {
+          {(questions as FAQQuestion[]).map((item, index) => {
             const links = [
               ...(item.link ? [item.link] : []),
               ...(item.links ?? []),
             ];
 
             return (
-              <details
+              <Reveal
                 key={item.question}
-                className="group border-b border-[#2c5128]/45"
+                className="border-b border-[#2c5128]/45"
+                delay={index * 0.04}
               >
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-5 py-5 font-bebas text-xl uppercase leading-tight marker:hidden [&::-webkit-details-marker]:hidden sm:py-6 sm:text-2xl">
-                  <span>{item.question}</span>
-                  <Plus className="size-5 shrink-0 transition-transform duration-300 group-open:rotate-45 sm:size-6" />
-                </summary>
-                <div className="max-w-2xl pb-6 pr-10 font-inter text-sm leading-relaxed text-[#171915]">
-                  <p>{item.answer}</p>
-                  {links.length > 0 && (
-                    <div className="mt-3 flex flex-wrap gap-x-5 gap-y-2">
-                      {links.map((link) => (
-                        <a
-                          key={link.label}
-                          href={link.href}
-                          target={link.external ? "_blank" : undefined}
-                          rel={link.external ? "noreferrer" : undefined}
-                          className="inline-flex font-semibold text-[#2c5128] underline decoration-[#2c5128]/40 underline-offset-4 transition-colors hover:decoration-[#2c5128]"
-                        >
-                          {link.label} →
-                        </a>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              </details>
+                <details className="group">
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-5 py-5 font-bebas text-xl uppercase leading-tight marker:hidden [&::-webkit-details-marker]:hidden sm:py-6 sm:text-2xl">
+                    <span>{item.question}</span>
+                    <Plus className="size-5 shrink-0 transition-transform duration-300 group-open:rotate-45 sm:size-6" />
+                  </summary>
+                  <div className="max-w-2xl pb-6 pr-10 font-inter text-sm leading-relaxed text-[#171915]">
+                    <p>{item.answer}</p>
+                    {links.length > 0 && (
+                      <div className="mt-3 flex flex-wrap gap-x-5 gap-y-2">
+                        {links.map((link) => (
+                          <a
+                            key={link.label}
+                            href={link.href}
+                            target={link.external ? "_blank" : undefined}
+                            rel={link.external ? "noreferrer" : undefined}
+                            className="inline-flex font-semibold text-[#2c5128] underline decoration-[#2c5128]/40 underline-offset-4 transition-colors hover:decoration-[#2c5128]"
+                          >
+                            {link.label} →
+                          </a>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </details>
+              </Reveal>
             );
           })}
         </div>

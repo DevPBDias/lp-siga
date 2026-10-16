@@ -1,6 +1,7 @@
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import pastureImage from "@/src/assets/images/bg-real-farms.png";
+import Reveal from "../ui/reveal";
 
 const results = [
   { value: "+780", label: "animais cadastrados" },
@@ -37,7 +38,7 @@ export default function RealFarmsSection() {
 
       <div className="relative mx-auto my-8 w-full max-w-[1440px]">
         <div className="grid items-center gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
-          <div className="flex max-w-[min(100%,450px)] flex-col gap-4 lg:gap-8">
+          <Reveal className="flex max-w-[min(100%,450px)] flex-col gap-4 lg:gap-8">
             <div>
               <p className="mb-4 w-fit bg-[#f1ebe2] p-2 font-bebas text-base uppercase tracking-[0.18em] text-[#203d1f] sm:px-3 sm:py-2 sm:text-sm">
                 Programa de testes
@@ -52,37 +53,42 @@ export default function RealFarmsSection() {
               e o manejo de verdade. Agora estamos abrindo vagas para mais
               fazendas entrarem no programa de testes.
             </p>
-          </div>
+          </Reveal>
 
           <div className="grid gap-4 sm:grid-cols-3 lg:gap-5">
-            {results.map(({ value, label }) => (
-              <article
-                key={label}
-                className="flex min-h-36 flex-col justify-center border border-[#f1ebe2] bg-[#f1ebe2]/95 p-5 text-center text-[#2c5128] shadow-[4px_4px_0_0_#4bd12d] sm:min-h-40 sm:p-4 lg:min-h-48 lg:p-6"
-              >
-                <p className="font-bebas text-[clamp(2.5rem,4vw,4rem)] leading-none text-[#2c5128]">
-                  {value}
-                </p>
-                <p className="mt-3 font-inter text-sm leading-snug text-[#171915] sm:text-xs lg:text-sm">
-                  {label}
-                </p>
-              </article>
+            {results.map(({ value, label }, index) => (
+              <Reveal key={label} delay={index * 0.1} hover>
+                <article
+                  className="flex min-h-36 flex-col justify-center border border-[#f1ebe2] bg-[#f1ebe2]/95 p-5 text-center text-[#2c5128] shadow-[4px_4px_0_0_#4bd12d] sm:min-h-40 sm:p-4 lg:min-h-48 lg:p-6"
+                >
+                  <p className="font-bebas text-[clamp(2.5rem,4vw,4rem)] leading-none text-[#2c5128]">
+                    {value}
+                  </p>
+                  <p className="mt-3 font-inter text-sm leading-snug text-[#171915] sm:text-xs lg:text-sm">
+                    {label}
+                  </p>
+                </article>
+              </Reveal>
             ))}
           </div>
         </div>
 
-        <a
-          href="#contact"
-          className="mx-auto mt-10 lg:mt-24 flex min-h-12 w-fit items-center justify-center gap-3 bg-[#f1ebe2] px-7 py-3 font-bebas text-lg uppercase text-[#203d1f] shadow-[4px_4px_0_0_#4bd12d] transition-colors hover:bg-white "
-        >
-          Quero entrar no programa de testes
-          <ArrowRight aria-hidden="true" className="size-5" />
-        </a>
+        <Reveal className="mx-auto mt-10 w-fit lg:mt-24">
+          <a
+            href="#contact"
+            className="flex min-h-12 items-center justify-center gap-3 bg-[#f1ebe2] px-7 py-3 font-bebas text-lg uppercase text-[#203d1f] shadow-[4px_4px_0_0_#4bd12d] transition-colors hover:bg-white"
+          >
+            Quero entrar no programa de testes
+            <ArrowRight aria-hidden="true" className="size-5" />
+          </a>
+        </Reveal>
 
-        <p className="mx-auto mt-8 max-w-2xl text-center font-bebas uppercase text-sm leading-relaxed text-[#f1ebe2]/90 sm:mt-10 sm:text-2xl">
-          Quem entra agora ajuda a moldar o aplicativo e recebe acompanhamento
-          de perto.
-        </p>
+        <Reveal className="mx-auto mt-8 max-w-2xl text-center sm:mt-10">
+          <p className="font-bebas uppercase text-sm leading-relaxed text-[#f1ebe2]/90 sm:text-2xl">
+            Quem entra agora ajuda a moldar o aplicativo e recebe acompanhamento
+            de perto.
+          </p>
+        </Reveal>
       </div>
     </section>
   );

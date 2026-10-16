@@ -2,6 +2,7 @@ import Image from "next/image";
 import hero_image from "@/src/assets/images/hero.png";
 import app_image from "@/src/assets/images/hero-app.png";
 import ScrollIndicator from "./scroll-indicator";
+import Reveal from "../ui/reveal";
 
 export default function HeroSection() {
   return (
@@ -30,7 +31,7 @@ export default function HeroSection() {
         }}
       />
 
-      <div className="relative z-10 w-full max-w-[1350px] mx-auto px-6 py-24 lg:py-32">
+      <Reveal className="relative z-10 w-full max-w-[1350px] mx-auto px-6 py-24 lg:py-32">
         <div className="md:max-w-[45%] flex flex-col gap-4 lg:gap-6">
           {/* Eyebrow */}
           <span className="inline-flex items-center gap-3 font-inter text-[clamp(0.625rem,1.2vw,1rem)] text-[#f1ebe2]/85">
@@ -66,15 +67,17 @@ export default function HeroSection() {
             </a>
           </div>
         </div>
-      </div>
+      </Reveal>
 
       {/* App Image */}
-      <Image
-        src={app_image}
-        alt="App Image"
-        priority
-        className="hidden md:block absolute z-20 bottom md:bottom-42 xl:bottom-24 2xl:bottom-42 right-4 w-[clamp(24rem,40vw,38rem)] h-[clamp(24rem,40vw,38rem)] object-contain object-center opacity-100 lg:left-auto lg:right-[clamp(2rem,6vw,5rem)] lg:translate-x-0"
-      />
+      <Reveal className="hidden md:block absolute z-20 bottom md:bottom-42 xl:bottom-24 2xl:bottom-42 right-4 w-[clamp(24rem,40vw,38rem)] h-[clamp(24rem,40vw,38rem)] lg:left-auto lg:right-[clamp(2rem,6vw,5rem)] lg:translate-x-0">
+        <Image
+          src={app_image}
+          alt="App Image"
+          priority
+          className="size-full object-contain object-center opacity-100"
+        />
+      </Reveal>
 
       <ScrollIndicator />
     </section>

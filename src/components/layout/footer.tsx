@@ -3,8 +3,8 @@
 import Image from "next/image";
 import pastureImage from "@/src/assets/images/hero.png";
 import instagramIcon from "@/src/assets/icons/instagram.png";
-import { whatsappDisplayNumber, whatsappNumber } from "@/src/constants/contact";
 import { useEffect, useState } from "react";
+import Reveal from "../ui/reveal";
 
 const instagramUrl =
   process.env.NEXT_PUBLIC_INSTAGRAM_URL ?? "https://www.instagram.com/";
@@ -52,7 +52,7 @@ export default function Footer() {
 
       <div className="mx-auto w-full max-w-[1440px] px-6 pb-6 pt-16 sm:px-10 lg:px-14 lg:pt-20">
         <div className="grid gap-12 border-b border-[#f1ebe2]/30 pb-12 md:grid-cols-[1.4fr_1fr] md:gap-16">
-          <div>
+          <Reveal>
             <a
               href="#top"
               className="font-bebas text-5xl uppercase leading-none tracking-wide sm:text-6xl"
@@ -63,25 +63,27 @@ export default function Footer() {
               Gestão pecuária integrada para acompanhar seu rebanho em qualquer
               lugar, mesmo sem conexão com a internet.
             </p>
-          </div>
+          </Reveal>
 
-          <nav aria-label="Navegação do rodapé">
-            <h2 className="font-bebas text-xl uppercase tracking-wide">
-              Navegação
-            </h2>
-            <ul className="mt-4 grid grid-cols-2 gap-x-6 gap-y-3 font-inter text-sm">
-              {footerLinks.map((link) => (
-                <li key={link.href}>
-                  <a
-                    href={link.href}
-                    className="text-[#f1ebe2]/85 transition-colors hover:text-white"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </nav>
+          <Reveal delay={0.12}>
+            <nav aria-label="Navegação do rodapé">
+              <h2 className="font-bebas text-xl uppercase tracking-wide">
+                Navegação
+              </h2>
+              <ul className="mt-4 grid grid-cols-2 gap-x-6 gap-y-3 font-inter text-sm">
+                {footerLinks.map((link) => (
+                  <li key={link.href}>
+                    <a
+                      href={link.href}
+                      className="text-[#f1ebe2]/85 transition-colors hover:text-white"
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          </Reveal>
         </div>
 
         <div className="flex flex-col gap-4 border-b border-[#f1ebe2]/30 py-5 font-inter text-sm sm:flex-row sm:items-center sm:justify-between">

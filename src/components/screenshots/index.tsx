@@ -3,12 +3,14 @@
 import Image from "next/image";
 import { useRef, useState } from "react";
 import type { KeyboardEvent } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import homePage from "@/src/assets/images/home-page.png";
 import consultPage from "@/src/assets/images/consult-page.png";
 import managePage from "@/src/assets/images/manage-page.png";
 import calendarPage from "@/src/assets/images/calendar-page.png";
 import reproductionPage from "@/src/assets/images/reproduction-page.png";
 import semenPage from "@/src/assets/images/semen-page.png";
+import Reveal from "../ui/reveal";
 
 const screens = [
   {
@@ -68,6 +70,7 @@ export default function ScreenshotsSection() {
   const [activeIndex, setActiveIndex] = useState(0);
   const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const activeScreen = screens[activeIndex];
+  const reduceMotion = useReducedMotion();
 
   function handleTabKeyDown(event: KeyboardEvent<HTMLButtonElement>) {
     let nextIndex = activeIndex;
@@ -100,7 +103,7 @@ export default function ScreenshotsSection() {
       }}
     >
       <div className="mx-auto grid w-full max-w-[1440px] items-center gap-8 lg:grid-cols-[0.72fr_1px_1.28fr] lg:gap-10 xl:gap-14">
-        <div className="flex flex-col gap-4 lg:gap-8 max-w-[min(100%,450px)]">
+        <Reveal className="flex flex-col gap-4 lg:gap-8 max-w-[min(100%,450px)]">
           <div>
             <p className="bg-[#2c5128] w-fit p-2 mb-4 font-bebas text-xs uppercase tracking-[0.18em] text-white sm:px-3 sm:py-2 lg:text-sm">
               Ferramentas para o dia a dia
@@ -115,12 +118,12 @@ export default function ScreenshotsSection() {
             Explore as telas do SIGA Cattle e veja como acompanhar o manejo do
             rebanho em cada etapa.
           </p>
-        </div>
+        </Reveal>
 
         <div className="hidden h-full min-h-[34rem] w-1 bg-[#2c5128] lg:block" />
         <div className="h-1 w-full bg-[#2c5128] lg:hidden" />
 
-        <div className="min-w-0">
+        <Reveal className="min-w-0">
           {/* Mobile: one swipeable card per app screen */}
           <div className="lg:hidden">
             <div
@@ -128,31 +131,35 @@ export default function ScreenshotsSection() {
               className="flex w-full min-w-0 snap-x snap-mandatory gap-4 overflow-x-auto overscroll-x-contain pb-4 [scrollbar-width:thin]"
             >
               {screens.map((screen, index) => (
-                <article
+                <Reveal
                   key={screen.id}
-                  className="box-border w-full min-w-0 flex-[0_0_100%] snap-start overflow-hidden border border-[#2c5128] bg-white shadow-[5px_5px_0_0_#2c5128]"
+                  className="box-border w-full min-w-0 flex-[0_0_100%] snap-start"
+                  delay={index * 0.05}
+                  hover
                 >
-                  <div className="p-4 sm:p-5">
-                    <p className="mb-2 font-inter text-xs font-medium uppercase tracking-[0.16em] text-[#2c5128]/65">
-                      Tela {index + 1} de {screens.length}
-                    </p>
-                    <h3 className="font-bebas text-xl uppercase leading-tight sm:text-2xl">
-                      {screen.title}
-                    </h3>
-                    <p className="mt-2 font-inter text-xs leading-relaxed text-[#171915]">
-                      {screen.caption}
-                    </p>
-                  </div>
-                  <div className="relative h-[480px] border-t border-[#2c5128]/15 bg-[#e5e9e2]">
-                    <Image
-                      src={screen.image}
-                      alt={`Captura de tela do aplicativo: ${screen.title}`}
-                      fill
-                      sizes="(min-width: 640px) 80vw, 90vw"
-                      className="object-contain p-3 sm:p-5"
-                    />
-                  </div>
-                </article>
+                  <article className="overflow-hidden border border-[#2c5128] bg-white shadow-[5px_5px_0_0_#2c5128]">
+                    <div className="p-4 sm:p-5">
+                      <p className="mb-2 font-inter text-xs font-medium uppercase tracking-[0.16em] text-[#2c5128]/65">
+                        Tela {index + 1} de {screens.length}
+                      </p>
+                      <h3 className="font-bebas text-xl uppercase leading-tight sm:text-2xl">
+                        {screen.title}
+                      </h3>
+                      <p className="mt-2 font-inter text-xs leading-relaxed text-[#171915]">
+                        {screen.caption}
+                      </p>
+                    </div>
+                    <div className="relative h-[480px] border-t border-[#2c5128]/15 bg-[#e5e9e2]">
+                      <Image
+                        src={screen.image}
+                        alt={`Captura de tela do aplicativo: ${screen.title}`}
+                        fill
+                        sizes="(min-width: 640px) 80vw, 90vw"
+                        className="object-contain p-3 sm:p-5"
+                      />
+                    </div>
+                  </article>
+                </Reveal>
               ))}
             </div>
             <p className="mt-1 text-center font-inter text-xs text-[#2c5128]/60">
@@ -185,7 +192,7 @@ export default function ScreenshotsSection() {
                     tabIndex={isActive ? 0 : -1}
                     onClick={() => setActiveIndex(index)}
                     onKeyDown={handleTabKeyDown}
-                    className={`relative flex min-h-12 flex-col items-start justify-center border px-3 py-2.5 text-left transition-all sm:px-4 sm:py-3 ${
+                    className={`relative flex min-h-12 flex-col items-start justify-center border px-3 py-2.5 text-left transition-all hover:-translate-y-0.5 motion-reduce:transition-none motion-reduce:hover:translate-y-0 sm:px-4 sm:py-3 ${
                       isActive
                         ? "border-[#2c5128] bg-[#2c5128] text-[#f1ebe2] shadow-[3px_3px_0_0_#4bd12d]"
                         : "border-[#2c5128]/50 bg-white/70 text-[#2c5128] hover:border-[#2c5128] hover:bg-white"
@@ -213,29 +220,38 @@ export default function ScreenshotsSection() {
               tabIndex={0}
               className="min-w-0 outline-none focus-visible:ring-2 focus-visible:ring-[#4bd12d]"
             >
-              <figure className="overflow-hidden border border-[#2c5128] bg-white shadow-[5px_5px_0_0_#2c5128]">
-                <div className="relative h-[clamp(22rem,42vw,34rem)] bg-[#e5e9e2]">
-                  <Image
-                    key={activeScreen.id}
-                    src={activeScreen.image}
-                    alt={`Captura de tela do aplicativo: ${activeScreen.title}`}
-                    fill
-                    sizes="(min-width: 1024px) 42vw, 65vw"
-                    className="object-contain p-3 sm:p-5"
-                  />
-                </div>
-                <figcaption className="min-h-24 border-t border-[#2c5128]/15 p-4 sm:p-5">
-                  <h3 className="font-bebas text-xl uppercase leading-tight sm:text-2xl">
-                    {activeScreen.title}
-                  </h3>
-                  <p className="mt-2 font-inter text-xs leading-relaxed text-[#171915] sm:text-sm">
-                    {activeScreen.caption}
-                  </p>
-                </figcaption>
-              </figure>
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.figure
+                  key={activeScreen.id}
+                  initial={reduceMotion ? false : { opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={reduceMotion ? undefined : { opacity: 0, y: -8 }}
+                  transition={{ duration: reduceMotion ? 0 : 0.25 }}
+                  className="overflow-hidden border border-[#2c5128] bg-white shadow-[5px_5px_0_0_#2c5128]"
+                >
+                  <div className="relative h-[clamp(22rem,42vw,34rem)] bg-[#e5e9e2]">
+                    <Image
+                      key={activeScreen.id}
+                      src={activeScreen.image}
+                      alt={`Captura de tela do aplicativo: ${activeScreen.title}`}
+                      fill
+                      sizes="(min-width: 1024px) 42vw, 65vw"
+                      className="object-contain p-3 sm:p-5"
+                    />
+                  </div>
+                  <figcaption className="min-h-24 border-t border-[#2c5128]/15 p-4 sm:p-5">
+                    <h3 className="font-bebas text-xl uppercase leading-tight sm:text-2xl">
+                      {activeScreen.title}
+                    </h3>
+                    <p className="mt-2 font-inter text-xs leading-relaxed text-[#171915] sm:text-sm">
+                      {activeScreen.caption}
+                    </p>
+                  </figcaption>
+                </motion.figure>
+              </AnimatePresence>
             </div>
           </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   );
