@@ -51,7 +51,7 @@ export default function HeroSection() {
             em um só aplicativo. Funciona no curral, mesmo sem sinal.
           </p>
 
-          <div className="grid grid-cols-2 items-center gap-4 lg:gap-8 w-full">
+          <div className="grid grid-cols-1md:grid-cols-2 items-center gap-4 lg:gap-8 w-full">
             <a
               href="#contact"
               className="inline-flex cursor-pointer items-center justify-center border border-[#f1ebe2] bg-[#172516]/20 px-6 py-3 text-base font-semibold text-[#f1ebe2] shadow-[4px_4px_0_0_#F7E9D4] transition-colors hover:bg-[#f1ebe2]/20"
