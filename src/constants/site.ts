@@ -1,2 +1,2 @@
 export const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://lp-siga.vercel.app";
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.sigacattle.com.br";
