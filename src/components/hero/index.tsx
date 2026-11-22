@@ -42,7 +42,6 @@ export default function HeroSection() {
           {/* Main headline */}
           <h1 className="text-left font-bebas uppercase text-[clamp(3.5rem,6vw,7rem)] leading-[0.86] tracking-tight text-[#f1ebe2]">
             Seu rebanho
-            <span className="block">sob controle</span>
             <span className="block">na palma da mão</span>
           </h1>
           {/* Subtitle */}
